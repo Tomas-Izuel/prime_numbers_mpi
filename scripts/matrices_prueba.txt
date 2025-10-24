@@ -1,0 +1,33 @@
+# Matrices de prueba para el contador de primos
+
+# Matriz 1: Matriz original del problema (5x9) - Resultado: 7 primos
+5 9
+98 88 0 5 7 40 20 33 22
+14 82 20 0 17 24 21 30 12
+10 28 12 4 71 26 90 74 8
+44 18 2 1 10 24 21 30 12
+65 60 0 72 84 1 59 55 13
+
+# Matriz 2: Matriz pequeña (3x4) - Resultado: 4 primos
+3 4
+1 2 3 4
+5 6 7 8
+9 10 11 12
+
+# Matriz 3: Matriz con muchos primos (4x5) - Resultado: 8 primos
+4 5
+2 3 5 7 11
+13 17 19 23 29
+31 37 41 43 47
+53 59 61 67 71
+
+# Matriz 4: Matriz sin primos (3x3) - Resultado: 0 primos
+3 3
+4 6 8
+9 10 12
+14 15 16
+
+# Matriz 5: Matriz mixta (2x6) - Resultado: 3 primos
+2 6
+1 2 4 5 6 8
+9 10 11 12 13 14
