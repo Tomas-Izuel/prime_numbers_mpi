@@ -35,12 +35,12 @@ for i in {1..10000}; do
     fi
 done >> /tmp/matriz_mediana.txt
 
-# Matriz gigante (500x500) - 250,000 elementos
-echo "Creando matriz gigante (500x500)..."
-printf "500 500\n" > /tmp/matriz_gigante.txt
-for i in {1..250000}; do
+# Matriz gigante (1000x1000) - 250,000 elementos
+echo "Creando matriz gigante (1000x1000)..."
+printf "1000 1000\n" > /tmp/matriz_gigante.txt
+for i in {1..1000000}; do
     printf "%d " $((RANDOM % 10000 + 1))
-    if [ $((i % 500)) -eq 0 ]; then
+    if [ $((i % 1000)) -eq 0 ]; then
         printf "\n"
     fi
 done >> /tmp/matriz_gigante.txt
@@ -55,7 +55,7 @@ medir_tiempo "Matriz Pequeña (10x10) - 100 elementos" "cat /tmp/matriz_pequena.
 medir_tiempo "Matriz Mediana (100x100) - 10,000 elementos" "cat /tmp/matriz_mediana.txt | ./contar_primos_secuencial"
 
 # Test 3: Matriz gigante
-medir_tiempo "Matriz Gigante (500x500) - 250,000 elementos" "cat /tmp/matriz_gigante.txt | ./contar_primos_secuencial"
+medir_tiempo "Matriz Gigante (1000x1000) - 1000,000 elementos" "cat /tmp/matriz_gigante.txt | ./contar_primos_secuencial"
 
 # Limpiar archivos temporales
 echo "Limpiando archivos temporales..."
