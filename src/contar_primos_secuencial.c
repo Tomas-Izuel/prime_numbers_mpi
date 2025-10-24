@@ -24,18 +24,6 @@ int contar_primos_matriz(int *matriz, int total_elementos) {
     return contador;
 }
 
-void crear_matriz_ejemplo(int **matriz, int M, int R) {
-    *matriz = (int*)malloc(M * R * sizeof(int));
-    int matriz_ejemplo[] = {
-        98, 88, 0, 5, 7, 40, 20, 33, 22,
-        14, 82, 20, 0, 17, 24, 21, 30, 12,
-        10, 28, 12, 4, 71, 26, 90, 74, 8,
-        44, 18, 2, 1, 10, 24, 21, 30, 12,
-        65, 60, 0, 72, 84, 1, 59, 55, 13
-    };
-    memcpy(*matriz, matriz_ejemplo, M * R * sizeof(int));
-}
-
 void mostrar_matriz(int *matriz, int M, int R) {
     printf("\nMatriz ingresada:\n");
     for (int i = 0; i < M; i++) {
@@ -60,15 +48,10 @@ int main() {
     int *matriz = NULL;
     int primos_total = 0;
     
-    printf("Ingrese las dimensiones de la matriz (M R): ");
+    printf("Ingrese las dimensiones de la matriz (N X M): ");
     scanf("%d %d", &M, &R);
     
-    if (M == 5 && R == 9) {
-        printf("Usando matriz de ejemplo del problema...\n");
-        crear_matriz_ejemplo(&matriz, M, R);
-    } else {
-        leer_matriz(&matriz, M, R);
-    }
+    leer_matriz(&matriz, M, R);
     
     mostrar_matriz(matriz, M, R);
     

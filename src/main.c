@@ -24,12 +24,7 @@ int main(int argc, char *argv[]) {
         printf("Ingrese las dimensiones de la matriz (M R): ");
         scanf("%d %d", &M, &R);
         
-        if (M == 5 && R == 9) {
-            printf("Usando matriz de ejemplo del problema...\n");
-            crear_matriz_ejemplo(&matriz, M, R);
-        } else {
-            leer_matriz(&matriz, M, R);
-        }
+        leer_matriz(&matriz, M, R);
         
         mostrar_matriz(matriz, M, R);
     }

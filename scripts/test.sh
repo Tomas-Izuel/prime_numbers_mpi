@@ -1,16 +1,64 @@
 #!/bin/bash
 
-echo " Matriz 1: Original del problema (5x9)"
-echo "5 9" | ./contar_primos_secuencial
+echo "=== Test de rendimiento con matrices de diferentes tamaños ==="
 
-echo -e "\n Matriz 2: Pequeña (3x4)"
-printf "3 4\n1 2 3 4\n5 6 7 8\n9 10 11 12\n" | ./contar_primos_secuencial
+# Función para medir tiempo
+medir_tiempo() {
+    local descripcion="$1"
+    local comando="$2"
+    
+    echo "=== $descripcion ==="
+    echo "Ejecutando: $comando"
+    
+    # Medir tiempo con time
+    time eval "$comando"
+    echo ""
+}
 
-echo -e "\n Matriz 3: Con muchos primos (4x5)"
-printf "4 5\n2 3 5 7 11\n13 17 19 23 29\n31 37 41 43 47\n53 59 61 67 71\n" | ./contar_primos_secuencial
+# Matriz pequeña (10x10) - 100 elementos
+echo "Creando matriz pequeña (10x10)..."
+printf "10 10\n" > /tmp/matriz_pequena.txt
+for i in {1..100}; do
+    printf "%d " $((RANDOM % 100 + 1))
+    if [ $((i % 10)) -eq 0 ]; then
+        printf "\n"
+    fi
+done >> /tmp/matriz_pequena.txt
 
-echo -e "\n Matriz 4: Sin primos (3x3)"
-printf "3 3\n4 6 8\n9 10 12\n14 15 16\n" | ./contar_primos_secuencial
+# Matriz mediana (100x100) - 10,000 elementos  
+echo "Creando matriz mediana (100x100)..."
+printf "100 100\n" > /tmp/matriz_mediana.txt
+for i in {1..10000}; do
+    printf "%d " $((RANDOM % 1000 + 1))
+    if [ $((i % 100)) -eq 0 ]; then
+        printf "\n"
+    fi
+done >> /tmp/matriz_mediana.txt
 
-echo -e "\n Matriz 5: Mixta (2x6)"
-printf "2 6\n1 2 4 5 6 8\n9 10 11 12 13 14\n" | ./contar_primos_secuencial
+# Matriz gigante (500x500) - 250,000 elementos
+echo "Creando matriz gigante (500x500)..."
+printf "500 500\n" > /tmp/matriz_gigante.txt
+for i in {1..250000}; do
+    printf "%d " $((RANDOM % 10000 + 1))
+    if [ $((i % 500)) -eq 0 ]; then
+        printf "\n"
+    fi
+done >> /tmp/matriz_gigante.txt
+
+echo "Matrices creadas. Iniciando pruebas de rendimiento..."
+echo ""
+
+# Test 1: Matriz pequeña
+medir_tiempo "Matriz Pequeña (10x10) - 100 elementos" "cat /tmp/matriz_pequena.txt | ./contar_primos_secuencial"
+
+# Test 2: Matriz mediana  
+medir_tiempo "Matriz Mediana (100x100) - 10,000 elementos" "cat /tmp/matriz_mediana.txt | ./contar_primos_secuencial"
+
+# Test 3: Matriz gigante
+medir_tiempo "Matriz Gigante (500x500) - 250,000 elementos" "cat /tmp/matriz_gigante.txt | ./contar_primos_secuencial"
+
+# Limpiar archivos temporales
+echo "Limpiando archivos temporales..."
+rm -f /tmp/matriz_pequena.txt /tmp/matriz_mediana.txt /tmp/matriz_gigante.txt
+
+echo "=== Test completado ==="
